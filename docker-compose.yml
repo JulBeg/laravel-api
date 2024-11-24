@@ -2,16 +2,8 @@ services:
   api:
     image: serversideup/php:8.4-fpm-alpine
     user: "${UID-1000}:${GID-1000}"
-    environment:
-      APP_NAME: ${APP_NAME}
-      DB_CONNECTION: ${DB_CONNECTION}
-      DB_HOST: ${DB_HOST}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      MAIL_MAILER: ${MAIL_MAILER}
-      MAIL_HOST: ${MAIL_HOST}
-      MAIL_PORT: ${MAIL_PORT}
+    env_file:
+      - .env
     volumes:
       - ./src:/var/www/html
     depends_on:
@@ -20,7 +12,13 @@ services:
     ports:
       - "8000:8000"
     command: [ "php", "/var/www/html/artisan", "serve", "--host=0.0.0.0" ]
-
+    healthcheck:
+      test: curl --fail http://localhost:8000/up || exit 1
+      interval: 10s
+      retries: 5
+      start_period: 20s
+      timeout: 5s
+      
   mysql:
     image: mysql:8.0
     environment:
