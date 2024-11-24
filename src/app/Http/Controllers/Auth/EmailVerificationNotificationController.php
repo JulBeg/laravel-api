@@ -11,7 +11,7 @@ class EmailVerificationNotificationController extends Controller
     /**
      * Send a new email verification notification.
      */
-    public function store(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
             return response()->json(['status' => 'already-verified']);
