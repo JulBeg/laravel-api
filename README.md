@@ -4,7 +4,7 @@ A dockerized Laravel REST API starter :
 
 ## Features
 
-- Laravel 11
+- Laravel 12
 - Sanctum Session Auth
 - Email verification
 - Telescope

@@ -14,7 +14,7 @@ class VerifyEmailController extends Controller
      */
     public function __invoke(EmailVerificationRequest $request): JsonResponse
     {
-        if (!$request->user()->hasVerifiedEmail() && $request->user()->markEmailAsVerified()) {
+        if (! $request->user()->hasVerifiedEmail() && $request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 

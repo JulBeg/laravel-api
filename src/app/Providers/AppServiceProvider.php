@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         VerifyEmail::createUrlUsing(function (object $notifiable) {
-            $frontendVerifyUrl = config('app.frontend_url') . '/auth/verify';
+            $frontendVerifyUrl = config('app.frontend_url').'/auth/verify';
 
             $verifyUrl = URL::temporarySignedRoute(
                 'verification.verify',
@@ -38,11 +38,11 @@ class AppServiceProvider extends ServiceProvider
                 ]
             );
 
-            return $frontendVerifyUrl . '?verify_url=' . urlencode($verifyUrl);
+            return $frontendVerifyUrl.'?verify_url='.urlencode($verifyUrl);
         });
 
         ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
-            return config('app.frontend_url') . "/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
+            return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });
     }
 }
