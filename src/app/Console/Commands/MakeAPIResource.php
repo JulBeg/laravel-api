@@ -37,15 +37,15 @@ class MakeAPIResource extends Command implements PromptsForMissingInput
             '--migration' => true,
             '--resource' => true,
             '--requests' => true,
-            '--seed' => true,            
+            '--seed' => true,
             '--api' => true,
             '--test' => true,
         ]);
 
         $this->call('make:resource', [
-            'name' => $name . 'Resource',
+            'name' => $name.'Resource',
         ]);
-        
+
         $this->info("API resource created successfully: {$name}");
     }
 }
