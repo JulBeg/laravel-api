@@ -13,7 +13,10 @@ A dockerized Laravel REST API starter :
 
 ## Installation
 
-Install docker then run `docker compose up -d`
+1. Install docker
+2. Clone the repo
+3. Install composer packages `docker compose run --rm api composer install`
+4. Launch the API `docker compose up -d`
 
 Import Postman's setup files from `./.postman` to test the api auth endpoints.
 
