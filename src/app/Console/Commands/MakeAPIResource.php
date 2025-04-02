@@ -24,7 +24,7 @@ class MakeAPIResource extends Command implements PromptsForMissingInput
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): never
     {
         $name = $this->argument('name');
 
@@ -43,7 +43,7 @@ class MakeAPIResource extends Command implements PromptsForMissingInput
         ]);
 
         $this->call('make:resource', [
-            'name' => $name.'Resource',
+            'name' => $name . 'Resource',
         ]);
 
         $this->info("API resource created successfully: {$name}");
