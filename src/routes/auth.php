@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\Session\SessionRegisteredController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('auth')->group(function () {
+Route::prefix('auth')->group(function (): void {
     Route::post('/register', SessionRegisteredController::class)
         ->middleware('guest')
         ->name('register');

@@ -69,6 +69,11 @@ final class AuthService
         return $this->createToken($user, $tokenName);
     }
 
+    public function createToken(HasApiTokens $tokenable, ?string $tokenName): string
+    {
+        return $tokenable->createToken($tokenName ?? config('sanctum.default_token_name', 'auth_token'))->plainTextToken;
+    }
+
     /**
      * @return array<string, mixed>
      */
@@ -84,11 +89,6 @@ final class AuthService
         throw ValidationException::withMessages([
             'email' => __('auth.failed'),
         ]);
-    }
-
-    public function createToken(HasApiTokens $tokenable, ?string $tokenName): string
-    {
-        return $tokenable->createToken($tokenName ?? config('sanctum.default_token_name', 'auth_token'))->plainTextToken;
     }
 
     /**
