@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth\Token;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-class TokenRegisteredController extends Controller
+class TokenRegisteredController
 {
     /**
      * Handle an incoming registration request.

@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth\Session;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\UserService;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
-class SessionRegisteredController extends Controller
+class SessionRegisteredController
 {
     /**
      * Handle an incoming registration request.

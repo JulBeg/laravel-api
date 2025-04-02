@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth\Session;
 
-use App\Http\Controllers\Controller;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class SessionGeneratedTokenController extends Controller
+class SessionGeneratedTokenController
 {
     public function __invoke(Request $request, AuthService $authService): JsonResponse
     {
