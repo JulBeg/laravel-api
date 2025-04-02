@@ -1,19 +1,21 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\AuthenticatedUserController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\Session\SessionAuthenticatedController;
+use App\Http\Controllers\Auth\Session\SessionGeneratedTokenController;
+use App\Http\Controllers\Auth\Session\SessionRegisteredController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
-    Route::post('/register', RegisteredUserController::class)
+    Route::post('/register', SessionRegisteredController::class)
         ->middleware('guest')
         ->name('register');
 
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+    Route::post('/login', [SessionAuthenticatedController::class, 'store'])
         ->middleware('guest')
         ->name('login');
 
@@ -33,7 +35,15 @@ Route::prefix('auth')->group(function () {
         ->middleware(['auth', 'throttle:6,1'])
         ->name('verification.send');
 
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    Route::post('/logout', [SessionAuthenticatedController::class, 'destroy'])
         ->middleware('auth')
         ->name('logout');
+
+    Route::get('/user', AuthenticatedUserController::class)
+        ->middleware('auth')
+        ->name('user');
+
+    Route::get('/token', SessionGeneratedTokenController::class)
+        ->middleware('auth')
+        ->name('token');
 });
