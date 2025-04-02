@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Auth\Session;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
