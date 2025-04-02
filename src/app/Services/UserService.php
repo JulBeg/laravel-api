@@ -7,7 +7,7 @@ namespace App\Services;
 use App\DTO\UserDTO;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Events\Dispatcher;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
