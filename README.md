@@ -29,3 +29,36 @@ Import Postman's setup files from `./.postman` to test the api auth endpoints.
 - **Run tests**: `php artisan tests`
 - **Create a new Resource:** `php artisan make:api-resource <name>`
 - **Telescope:** `http://localhost:8000/telescope`
+
+## CLI
+
+The project includes a convenient command-line tool `lvl` for managing the Docker environment:
+
+```bash
+# Run Artisan commands
+./lvl artisan <command>
+
+# Manage containers
+./lvl start
+./lvl stop
+./lvl restart
+./lvl down # with -v to destroy volumes
+
+# Development tools
+./lvl composer <command>
+./lvl test
+./lvl pint
+./lvl stan
+
+# Docker management
+./lvl build [image]
+./lvl logs [container]
+./lvl exec [command]
+
+# Project management
+./lvl install
+./lvl update
+./lvl destroy
+```
+
+For a complete list of commands and options, run `./lvl` without arguments.
