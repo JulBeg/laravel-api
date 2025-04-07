@@ -30,6 +30,27 @@ Import Postman's setup files from `./.postman` to test the api auth endpoints.
 - **Create a new Resource:** `php artisan make:api-resource <name>`
 - **Telescope:** `http://localhost:8000/telescope`
 
+### API Resource Generation
+
+You can generate a new resource with the artisan command:
+
+```bash
+./lvl artisan make:api-resource {resource_name}
+```
+
+It will generate the following files:
+
+- Model
+- Migration
+- Seeder
+- Controller
+- Requests
+- Resource
+- Routes
+- Tests
+
+You can also ask cursor to generate everything for you, just ask for a new resource with the details of its attributes and relationship and it will generate everything for you using the rule in `./.cursor/rules/generate-api-resource.mdc`:
+
 ## CLI
 
 The project includes a convenient command-line tool `lvl` for managing the Docker environment:

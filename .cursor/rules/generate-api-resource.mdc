@@ -1,0 +1,53 @@
+---
+description: This rule is used to generate a new resource
+globs: 
+alwaysApply: false
+---
+Follow this rule to generate a complete API resource with all necessary components.
+If user did not provide any informations about the resource attributes **stop and ask** more details about it.
+
+You must follow exactly those steps !
+
+1. Generate the resource using CLI:
+```bash
+./lvl artisan make:api-resource {resource_name}
+```
+**The new files are in the ./src directory !**
+
+2. Update the new files based on user description:
+   - Migration
+   - Model
+   - Seeders
+   - Add the new seeder to DatabaseSeeder
+
+4. **Ask for user validation before continuing**
+
+5. Update the new files based on user description:
+   - Request rules
+   - Controller methods
+   - Routes
+   - Resources
+
+5. **Ask for user validation before continuing**
+
+6. Go to ./src and generate tests:
+   - Feature tests for the model
+   - Feature tests for the controller
+
+7. Run tests:
+```bash
+./lvl artisan test
+```
+
+8. Invite user to run migrations:
+```bash
+./lvl artisan migrate
+```
+
+## Notes
+
+- Follow Laravel best practices
+- Use proper validation rules
+- Implement proper error handling
+- Add appropriate documentation
+- Follow PSR-12 coding standards
