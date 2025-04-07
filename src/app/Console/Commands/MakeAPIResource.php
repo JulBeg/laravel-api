@@ -26,7 +26,7 @@ class MakeAPIResource extends Command implements PromptsForMissingInput
     /**
      * Execute the console command.
      */
-    public function handle(): never
+    public function handle(): void
     {
         $name = $this->argument('name');
 
