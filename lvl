@@ -38,12 +38,7 @@ exec() {
 
 # Install Laravel
 install() {
-    if [ ! -z "$(ls -A src 2>/dev/null)" ]; then
-        read -p "This will delete the src directory. Are you sure? [y/N]: " -r
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then exit; fi
-        rm -rf src && mkdir src
-    fi
-    docker compose exec api composer create-project --prefer-dist laravel/laravel .
+    docker compose run --rm api sh -c "echo 'Installing application dependencies...' && composer install && if [ ! -f .env ]; then echo 'Installing .env file...' && cp .env.example .env; fi && echo 'Generating application key...' && php artisan key:generate --ansi && echo 'Migrating database...' && php artisan migrate --graceful --ansi"
 }
 
 # Display and tail the logs of all containers or the specified one's
@@ -154,7 +149,7 @@ Available commands:
                                                 Options:
                                                     -v .................... Destroy the volumes as well
     exec [command] ............................. Execute a container
-    install ................................... Install a new Laravel application
+    install ................................... Install application dependencies
     logs [container] .......................... Display and tail the logs of all containers or the specified one's
     pint ...................................... PHP code style fixer
     restart ................................... Restart the containers
