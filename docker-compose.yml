@@ -1,11 +1,22 @@
+x-php: &php
+  build:
+    context: .
+    dockerfile: ./.docker/php/Dockerfile
+    args:
+      ENVIRONMENT: development
+      USER_ID: ${UID:-1000}
+      GROUP_ID: ${GID:-1000}
+  image: laravel
+  restart: unless-stopped
+  env_file:
+      - .env
+  volumes:
+    - ./src:/var/www/html
+    - ~/.cache/composer:/home/www-data/.cache/composer
+
 services:
   api:
-    image: serversideup/php:8.4-fpm-alpine
-    user: "${UID-1000}:${GID-1000}"
-    env_file:
-      - .env
-    volumes:
-      - ./src:/var/www/html
+    <<: *php
     depends_on:
       mysql:
         condition: service_healthy
@@ -20,12 +31,9 @@ services:
       timeout: 5s
 
   task:
-    image: serversideup/php:8.4-fpm-alpine
-    user: "${UID-1000}:${GID-1000}"
-    env_file:
-      - .env
+    <<: *php
     volumes:
-      - ./src:/var/www/html
+      - ./src:/srv
     command: ["php", "/var/www/html/artisan", "schedule:work"]
     depends_on:
       api:
@@ -57,8 +65,6 @@ services:
       PMA_HOST: ${DB_HOST}
       PMA_USER: ${DB_USERNAME}
       PMA_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - phpmyadmindata:/var/www/html
     ports:
       - "8080:80"
     depends_on:
@@ -73,4 +79,3 @@ services:
 
 volumes:
   mysqldata:
-  phpmyadmindata:
